@@ -38,7 +38,7 @@ $(document).ready(function() {
         },
         {
             "name": "Jacob",
-            "photo": "https://pbs.twimg.com/profile_images/691785039043022849/oWsy8LNR.jpg",
+            "photo": "http://static2.businessinsider.com/image/5899ffcf6e09a897008b5c04-1200/.jpg",
             "scores": [
                 "4",
                 "2",
@@ -118,7 +118,7 @@ $(document).ready(function() {
         },
         {
             "name": "Taylor",
-            "photo": "https://w.linkedin.com/in/taylorhampton1/",
+            "photo": "http://www.sepeb.com/profile-pictures/profile-pictures-005.jpg",
             "scores": [
                 "3",
                 "1",
@@ -134,7 +134,7 @@ $(document).ready(function() {
         },
         {
             "name": "James",
-            "photo": "no",
+            "photo": "http://www.maheshbabufans.com/wp-content/uploads/2013/05/profile-new-Copy-350x350.jpg",
             "scores": [
                 "3",
                 "3",
@@ -150,7 +150,6 @@ $(document).ready(function() {
         }
     ];
 
-
     function NewUser(name, image, survey) {
         this.name = name;
         this.image = image;
@@ -159,25 +158,23 @@ $(document).ready(function() {
 
     var user;
     var friendlist = [];
+    var selectedFriend;
+    var index = -1;
 
     $("#submitbutton").on("click", function(event) {
         event.preventDefault();
         surveyResponse = [];
         for (var i = 0; i < dropdowns.length; i++) {
             var selection = $("#" + dropdowns[i] + "").val();
-            console.log(selection);
+            // console.log(selection);
             checkResponse(selection);
         }
 
         var nameInput = $("#nameInput").val().trim();
         var imageLink = $("#imageLink").val().trim();
         user = new NewUser(nameInput, imageLink, surveyResponse);
-        // console.log(user);
         selectFriend();
-
         users.push(user);
-
-
     });
 
     function checkResponse(selection) {
@@ -205,11 +202,19 @@ $(document).ready(function() {
                 score = score + Math.abs(user.survey[i] - parseInt(users[j].scores[i]));
             }
             var friend = new Friend(users[j].name, score);
-            console.log(friend);
+            // console.log(friend);
             friendlist.push(friend);
         }
-        console.log(friendlist);
+        // console.log(friendlist);
         findMinimum();
+    }
+
+    function findWithAttr(array, value) {
+        for (var i = 0; i < array.length; i++) {
+            if (array[i].name === value) {
+                index = i;
+            }
+        }
     }
 
     function findMinimum() {
@@ -217,7 +222,15 @@ $(document).ready(function() {
             return a.score - b.score;
         })
         var min = friendlist[0];
-        console.log(min);
+        findWithAttr(users, min.name);
+        displayMatch();
+        $("#matchModal").modal("show");
     }
-    
+
+    function displayMatch() {
+        $("#matchName").append(users[index].name);
+        console.log(users[index].photo);
+        $("#imageName").append("<img src='" + users[index].photo + "'>");
+    }
+
 });
