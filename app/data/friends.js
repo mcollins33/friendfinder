@@ -157,6 +157,9 @@ $(document).ready(function() {
         this.survey = survey;
     };
 
+    var user;
+    var friendlist = [];
+
     $("#submitbutton").on("click", function(event) {
         event.preventDefault();
         surveyResponse = [];
@@ -168,7 +171,10 @@ $(document).ready(function() {
 
         var nameInput = $("#nameInput").val().trim();
         var imageLink = $("#imageLink").val().trim();
-        var user = new NewUser(nameInput, imageLink, surveyResponse);
+        user = new NewUser(nameInput, imageLink, surveyResponse);
+        // console.log(user);
+        selectFriend();
+
         users.push(user);
 
 
@@ -186,11 +192,32 @@ $(document).ready(function() {
         }
     }
 
-    function selectFriend() {
-        var score = 0;
-        for (var i = 0; i < 10; i++) {
-            score = score + math.abs(user[i] - users[0].survey[i]);
-        }
+    function Friend(name, score) {
+        this.name = name;
+        this.score = score;
+    };
 
+    function selectFriend() {
+
+        for (var j = 0; j < users.length; j++) {
+            var score = 0;
+            for (var i = 0; i < 10; i++) {
+                score = score + Math.abs(user.survey[i] - parseInt(users[j].scores[i]));
+            }
+            var friend = new Friend(users[j].name, score);
+            console.log(friend);
+            friendlist.push(friend);
+        }
+        console.log(friendlist);
+        findMinimum();
     }
+
+    function findMinimum() {
+        friendlist.sort(function(a, b) {
+            return a.score - b.score;
+        })
+        var min = friendlist[0];
+        console.log(min);
+    }
+    
 });
