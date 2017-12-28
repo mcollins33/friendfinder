@@ -1,22 +1,15 @@
 var path = require("path");
+var users = require("../data/friends");
 
 module.exports = function(app) {
 
 app.get("/api/friends", function(req, res) {
-    return res.json(characters);
+    return res.json(users);
 });
 
-// app.post("/api/friends", function(req, res) {
+app.post("/api/friends", function(req, res) {
   
-//   var newcharacter = req.body;
- 
-//   newcharacter.routeName = newcharacter.name.replace(/\s+/g, "").toLowerCase();
-
-//   console.log(newcharacter);
-
-//   characters.push(newcharacter);
-
-//   res.json(newcharacter);
-// });
+  users.push(req.body);
+});
 
 }
