@@ -8,16 +8,15 @@
     <link rel="stylesheet" type="text/css" href="./css/style.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="./data/friends.js"></script>
+    <script type="text/javascript" src="./data/friends1.js"></script>
 </head>
 
 <body>
     <div class="container">
-        <div class="input-group">
-            <p>Name (Required)</p>
-            <input type="text" class="form-control" id="nameInput">
-            <p>Link to Photo Image (Required)</p>
-            <input type="text" class="form-control" id="imageLink">
+        <h2>Survey Questions</h2>
+        <hr />
+        <h3>About You</h3>
+        <div class="input-group" id="inputs">
         </div>
         <div id="questions">
         </div>
@@ -37,6 +36,18 @@
                 </div>
             </div>
         </div>
+        <div class="modal" id="inputerror" tabindex=" -1 " role="dialog ">
+            <div class="modal-dialog " role="document ">
+                <div class="modal-content ">
+                    <div class="modal-header ">
+                        <h5 id="inputerrortitle"></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <p class="friendlist"><a href="/api/friends">API Friends List</a></p>
     </div>
 </body>
 
