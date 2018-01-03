@@ -67,6 +67,7 @@ $(document).ready(function() {
             $("#inputerrortitle").text("You must provide input in all fields");
             $("#inputerror").modal("show");
         }
+        console.log(surveyResponse);
     }
 
     function checkResponse(selection) {
